@@ -21,3 +21,5 @@ class aclient(discord.Client):
 
 client = aclient()
 tree = app_commands.CommandTree(client)
+
+## ANTI-SPAM
