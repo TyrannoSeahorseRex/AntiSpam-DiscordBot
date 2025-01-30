@@ -30,6 +30,12 @@ async def on_message(message):
         user_id = message.author.id
         current_time = datetime.now()
 
-# Initialize message count and timestamp if not present
-    if user_id not in client.message_count:
-        client.message_count[user_id] = {'count': 0, 'timestamp': current_time}
+        # Initialize message count and timestamp if not present
+        if user_id not in client.message_count:
+            client.message_count[user_id] = {'count': 0, 'timestamp': current_time}
+
+        # Check if 60 seconds have passed since the last message
+        if (current_time - client.message_count[user_id]['timestamp']).seconds >= 60:
+            client.message_count[user_id] = {'count': 1, 'timestamp': current_time}
+        else:
+            client.message_count[user_id]['count'] += 1
