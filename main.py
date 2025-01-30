@@ -23,3 +23,9 @@ client = aclient()
 tree = app_commands.CommandTree(client)
 
 ## ANTI-SPAM
+
+@client.event
+async def on_message(message):
+    if isinstance(message.channel, discord.TextChannel) and not message.author.bot:
+        user_id = message.author.id
+        current_time = datetime.now()
