@@ -39,3 +39,17 @@ async def on_message(message):
             client.message_count[user_id] = {'count': 1, 'timestamp': current_time}
         else:
             client.message_count[user_id]['count'] += 1
+
+        # Anti-spam check
+        if client.message_count[user_id]['count'] > 5:
+            await message.delete()
+            await message.channel.send(f"{message.author.mention}, don't spam!", delete_after=10)
+
+            if user_id not in client.timeout_users:
+                client.timeout_users.add(user_id)
+                await message.author.timeout(timedelta(minutes=10), reason="Spamming")
+                try:
+                    await message.author.send("You have been muted for spamming!")
+                    await message.author.send("https://tenor.com/view/yellow-emoji-no-no-emotiguy-no-no-no-gif-gif-9742000569423889376")
+                except Exception as e:
+                    print(f"Failed to send DM: {e}")
