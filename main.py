@@ -29,3 +29,7 @@ async def on_message(message):
     if isinstance(message.channel, discord.TextChannel) and not message.author.bot:
         user_id = message.author.id
         current_time = datetime.now()
+
+# Initialize message count and timestamp if not present
+    if user_id not in client.message_count:
+        client.message_count[user_id] = {'count': 0, 'timestamp': current_time}
