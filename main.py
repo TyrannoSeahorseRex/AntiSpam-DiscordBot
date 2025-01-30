@@ -53,3 +53,8 @@ async def on_message(message):
                     await message.author.send("https://tenor.com/view/yellow-emoji-no-no-emotiguy-no-no-no-gif-gif-9742000569423889376")
                 except Exception as e:
                     print(f"Failed to send DM: {e}")
+
+# RUN
+
+TOKEN = 'ENTER_TOKEN_HERE'
+client.run(TOKEN)
