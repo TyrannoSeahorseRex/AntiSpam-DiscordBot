@@ -11,3 +11,10 @@ class aclient(discord.Client):
         self.synced = False
         self.message_count = {}  # Track message counts
         self.timeout_users = set()  # Track users who are timed out
+
+    async def on_ready(self):
+        await self.wait_until_ready()
+        if not self.synced:
+            await tree.sync()
+            self.synced = True
+        print(f"We have logged in as User: {self.user}. ID: {self.user.id}.")
