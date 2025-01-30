@@ -18,3 +18,6 @@ class aclient(discord.Client):
             await tree.sync()
             self.synced = True
         print(f"We have logged in as User: {self.user}. ID: {self.user.id}.")
+
+client = aclient()
+tree = app_commands.CommandTree(client)
